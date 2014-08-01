@@ -2046,6 +2046,23 @@ YUI.add('xpathjs-test', function (Y) {
 				//Y.Assert.areSame( "", result.stringValue );
 			},
 
+			testEnclosedArea: function() {
+				var result,
+					geoshapeValue = '7.9377 -11.5845 0 0;7.9324 -11.5902 0 0;7.927 -11.5857 0 0;7.925 -11.578 0 0;7.9267 -11.5722 0 0;7.9325 -11.5708 0 0;7.9372 -11.5737 0 0;7.9393 -11.579 0 0;7.9377 -11.5845 0 0';
+
+				result = documentEvaluate("enclosed-area('"+geoshapeValue+"')", doc, null, win.XPathResult.NUMBER_TYPE, null);
+				Y.Assert.areSame(2328029.06, result.numberValue);
+
+				result = documentEvaluate("enclosed-area(./*)", doc.getElementById('FunctionEnclosedArea'), null, win.XPathResult.NUMBER_TYPE, null);
+				Y.Assert.areSame(2328029.06, result.numberValue);
+
+				result = documentEvaluate("enclosed-area('')", doc, null, win.XPathResult.NUMBER_TYPE, null);
+				Y.Assert.isNaN(result.numberValue);
+
+				result = documentEvaluate("enclosed-area('7.9377 -11.5845 0 0;7.9324 -11.5902 0 0')", doc, null, win.XPathResult.NUMBER_TYPE, null);
+				Y.Assert.areSame(0.0, result.numberValue);
+			},
+
 			/*testIndexedRepeat: function() {
 				var result, input, i;
 

@@ -188,6 +188,18 @@ if ($serve_xml)
 			<div></div>
 		</div>
 
+		<div id="FunctionEnclosedArea">
+			<div>7.9377 -11.5845 0 0</div>
+			<div>7.9324 -11.5902 0 0</div>
+			<div>7.927 -11.5857 0 0</div>
+			<div>7.925 -11.578 0 0</div>
+			<div>7.9267 -11.5722 0 0</div>
+			<div>7.9325 -11.5708 0 0</div>
+			<div>7.9372 -11.5737 0 0</div>
+			<div>7.9393 -11.579 0 0</div>
+			<div>7.9377 -11.5845 0 0</div>
+		</div>
+
 		<div id="FunctionWeightedChecklist">3</div>
 
 		<!-- *****************************-->
