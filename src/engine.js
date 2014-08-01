@@ -1810,17 +1810,17 @@ XPathJS = (function(){
 		return new Date(this.value * (1000 * 60 * 60 * 24) );
 	}
 	/** 
-     * Date type used in JavaRosa functions 
-     **/
-    DateType = function(value)
-    {
-    	BaseType.call(this, value, 'date', [
-    		'date',
-    		'string',
-    		'number',
-    		'boolean'
-    	])
-    }
+	 * Date type used in JavaRosa functions 
+	 **/
+	DateType = function(value)
+	{
+		BaseType.call(this, value, 'date', [
+			'date',
+			'string',
+			'number',
+			'boolean'
+		])
+	}
 
 	DateType.prototype = new BaseType;
 	DateType.constructor = DateType;
@@ -4517,8 +4517,8 @@ XPathJS = (function(){
 				{
 					//from broofa: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
 					var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    					var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-    					return v.toString(16);
+						var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+						return v.toString(16);
 					});
 					return new StringType(uuid);
 				}, 
@@ -4945,7 +4945,7 @@ XPathJS = (function(){
 				fn: function()
 				{
 					var root = (this.node.nodeName === '#document') ? this.node.documentElement : this.node.ownerDocument.firstElementChild,
-					 	versionAttr = root.attributes['version'];
+						versionAttr = root.attributes['version'];
 
 					if( versionAttr ) {
 						return new StringType(versionAttr.textContent);
@@ -5016,12 +5016,12 @@ XPathJS = (function(){
 					
 					// check if all geopoints are valid (copied from Enketo FormModel)
 					allValid = latLngs.every(function(coords){
-                    	return ( 
-	                    	(coords[ 0 ] !== '' && coords[ 0 ] >= -90 && coords[ 0 ] <= 90 ) &&
-	                        ( coords[ 1 ] !== '' && coords[ 1 ] >= -180 && coords[ 1 ] <= 180 ) &&
-	                        ( typeof coords[ 2 ] == 'undefined' || !isNaN( coords[ 2 ] ) ) &&
-	                        ( typeof coords[ 3 ] == 'undefined' || ( !isNaN( coords[ 3 ] ) && coords[ 3 ] >= 0 ) )
-	                        );
+						return ( 
+							(coords[ 0 ] !== '' && coords[ 0 ] >= -90 && coords[ 0 ] <= 90 ) &&
+							( coords[ 1 ] !== '' && coords[ 1 ] >= -180 && coords[ 1 ] <= 180 ) &&
+							( typeof coords[ 2 ] == 'undefined' || !isNaN( coords[ 2 ] ) ) &&
+							( typeof coords[ 3 ] == 'undefined' || ( !isNaN( coords[ 3 ] ) && coords[ 3 ] >= 0 ) )
+							);
 					});
 
 					if (!allValid) {
@@ -5044,8 +5044,8 @@ XPathJS = (function(){
 									lng: latLngs[ ( i + 1 ) % pointsCount ][ 1 ]
 								};
 								area += ( ( p2.lng - p1.lng ) * d2r ) *
-						    		( 2 + Math.sin( p1.lat * d2r ) + Math.sin( p2.lat * d2r ) );
-						    }
+									( 2 + Math.sin( p1.lat * d2r ) + Math.sin( p2.lat * d2r ) );
+							}
 							area = area * EARTH_RADIUS * EARTH_RADIUS / 2.0;
 						}
 						area = Math.abs( Math.round(area*100) ) / 100;
