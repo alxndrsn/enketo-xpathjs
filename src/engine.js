@@ -4989,12 +4989,12 @@ XPathJS = (function(){
 			},
 
 			/**
-			 * The enclosed-area function returns the area in m2 of a single geoshape
+			 * The area function returns the area in m2 of a single geoshape
 			 * value, or of a nodeset of ordered geopoints.
 			 *
 			 * @return {NumberType}
 			 */
-			"enclosed-area" : {
+			"area" : {
 
 				fn: function(a)
 				{
@@ -5027,7 +5027,7 @@ XPathJS = (function(){
 					if (!allValid) {
 						area = Number.NaN;
 					} else {
-						var EARTH_RADIUS = 6371000, //6378137.0,
+						var EARTH_RADIUS = 6378100,
 							pointsCount = latLngs.length,
 							d2r = Math.PI / 180,
 							p1, p2;
