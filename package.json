@@ -5,16 +5,23 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MartijnR/XPathJS_javarosa"
+    "url": "https://github.com/enketo/enketo-xpathjs"
   },
   "contributors": [
     "Andrej Pavlovic",
     "Martijn van de Rijdt"
   ],
-  "scripts": {
-  },
+  "scripts": {},
   "devDependencies": {
+    "chai": "^2.1.1",
     "grunt": "~0.4.1",
-    "grunt-php": "^0.3.2"
+    "grunt-karma": "^0.10.1",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-php": "^0.3.2",
+    "karma": "^0.12.31",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-mocha": "^0.1.10",
+    "mocha": "^2.1.0"
   }
 }
