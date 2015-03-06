@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 			},
 			headless: {
 				configFile: 'test/karma.conf.js',
-				browsers: ['PhantomJS']
+				browsers: ['Chrome', 'PhantomJS']
 			}
 		}
 	});
@@ -27,4 +27,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('server', ['php:server:keepalive']);
 	grunt.registerTask('default', ['php:server:keepalive']);
+
+	grunt.registerTask('test', ['karma']);
 };

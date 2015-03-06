@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/enketo/enketo-xpathjs"
   },
+  "scripts": {
+    "test": "grunt test"
+  },
   "contributors": [
     "Andrej Pavlovic",
     "Martijn van de Rijdt"
