@@ -1,239 +1,211 @@
-//      tests.FunctionNumberCase = new Y.Test.Case({//
+/* global define, describe, xdescribe, require, it, xit, before, after, beforeEach, afterEach, expect, Blob, doc, win, docEvaluate, documentEvaluate, window, filterAttributes, loadXMLFile, helpers, XPathJS*/
+"use strict";
 
-//          name: "Number Function Tests",//
+describe('native number functions', function() {
 
-//          _should: {
-//              error: {
-//                  testNumberExceptionTooManyArgs: true,
-//                  testSumExceptionTooManyArgs: true,
-//                  testSumExceptionNotEnoughArgs: true,
-//                  testFloorExceptionTooManyArgs: true,
-//                  testFloorExceptionNotEnoughArgs: true,
-//                  testCeilingExceptionTooManyArgs: true,
-//                  testCeilingExceptionNotEnoughArgs: true,
-//                  testRoundExceptionTooManyArgs: true,
-//                  testRoundExceptionNotEnoughArgs: true
-//              },
-//              ignore: {}
-//          },//
 
-//          testNumberNumber: function() {
-//              var result;//
+    describe('number() conversion of convertible numbers, strings, booleans', function() {
+        var test = function(t) {
+            it('works for ' + t[0], function() {
+                var result = documentEvaluate(t[0], doc, null, win.XPathResult.NUMBER_TYPE, null);
+                expect(result.numberValue).to.equal(t[1]);
+            });
+        };
 
-//              result = documentEvaluate("number(-1.0)", doc, null, win.XPathResult.NUMBER_TYPE, null);
-//              Y.Assert.areSame(-1, result.numberValue);//
+        // of numbers
+        [
+            ['number(-1.0)', -1],
+            ['number(1)', 1],
+            ['number(0.199999)', 0.199999],
+            ['number(-0.199999)', -0.199999],
+            ['number(- 0.199999)', -0.199999],
+            ['number(0.0)', 0],
+            ['number(.0)', 0],
+            ['number(0.)', 0]
+        ].forEach(test);
 
-//              result = documentEvaluate("number(1)", doc, null, win.XPathResult.NUMBER_TYPE, null);
-//              Y.Assert.areSame(1, result.numberValue);//
+        // of booleans
+        [
+            ['number(true())', 1],
+            ['number(false())', 0]
+        ].forEach(test);
 
-//              result = documentEvaluate("number(0.199999)", doc, null, win.XPathResult.NUMBER_TYPE, null);
-//              Y.Assert.areSame(0.199999, result.numberValue);//
+        // of strings
+        [
+            ["number('-1.0')", -1],
+            ["number('1')", 1],
+            ["number('0.199999')", 0.199999],
+            ["number('-0.9991')", -0.9991],
+            ["number('0.0')", 0],
+            ["number('.0')", 0],
+            ["number('.112')", 0.112],
+            ["number('0.')", 0],
+            ["number('  1.1')", 1.1],
+            ["number('1.1   ')", 1.1],
+            ["number('1.1   \n ')", 1.1],
+            ["number('  1.1 \n\r\n  ')", 1.1]
+        ].forEach(test);
+    });
 
-//              result = documentEvaluate("number(-0.9991)", doc, null, win.XPathResult.NUMBER_TYPE, null);
-//              Y.Assert.areSame(-0.9991, result.numberValue);//
+    it('number() conversions returns NaN if not convertible', function() {
+        [
+            ["number('asdf')", NaN],
+            ["number('1asdf')", NaN],
+            ["number('1.1sd')", NaN],
+            ["number('.1sd')", NaN],
+            ["number(' . ')", NaN]
+        ].forEach(function(t) {
+            var result = documentEvaluate(t[0], doc, null, win.XPathResult.NUMBER_TYPE, null);
+            expect(result.numberValue).to.be.a('number');
+            expect(result.numberValue).to.deep.equal(NaN);
+        });
+    });
 
-//              result = documentEvaluate("number(- 0.9991)", doc, null, win.XPathResult.NUMBER_TYPE, null);
-//              Y.Assert.areSame(-0.9991, result.numberValue);//
+    it('number() conversion of nodesets', function() {
+        [
+            ["number(self::node())", doc.getElementById('FunctionNumberCaseNumber'), 123],
+            ["number(*)", doc.getElementById('FunctionNumberCaseNumberMultiple'), -10],
+            ["number()", doc.getElementById('FunctionNumberCaseNumber'), 123]
+        ].forEach(function(t) {
+            var result = documentEvaluate(t[0], t[1], null, win.XPathResult.NUMBER_TYPE, null);
+            expect(result.numberValue).to.equal(t[2]);
+        });
 
-//              result = documentEvaluate("number(0.0)", doc, null, win.XPathResult.NUMBER_TYPE, null);
-//              Y.Assert.areSame(0, result.numberValue);//
+        [
+            ["number()", doc.getElementById('FunctionNumberCaseNotNumber')]
+        ].forEach(function(t) {
+            var result = documentEvaluate(t[0], t[1], null, win.XPathResult.NUMBER_TYPE, null);
+            expect(result.numberValue).to.be.a('number');
+            expect(result.numberValue).to.deep.equal(NaN);
+        });
+    });
 
-//              result = documentEvaluate("number(.0)", doc, null, win.XPathResult.NUMBER_TYPE, null);
-//              Y.Assert.areSame(0, result.numberValue);//
+    it('number() conversion fails when too many arguments are provided', function() {
+        var test = function() {
+            documentEvaluate("number(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
+        };
+        expect(test).to.throw(Error);
+    });
 
-//              result = documentEvaluate("number(0.)", doc, null, win.XPathResult.NUMBER_TYPE, null);
-//              Y.Assert.areSame(0, result.numberValue);
-//          },//
+    it('sum()', function() {
+        [
+            ["sum(self::*)", doc.getElementById('FunctionNumberCaseNumber'), 123],
+            ["sum(*)", doc.getElementById('FunctionNumberCaseNumberMultiple'), 100]
+        ].forEach(function(t) {
+            var result = documentEvaluate(t[0], t[1], null, win.XPathResult.NUMBER_TYPE, null);
+            expect(result.numberValue).to.equal(t[2]);
+        });
 
-//          testNumberBoolean: function() {
-//              var result;//
+        [
+            ["sum(node())", doc.getElementById('FunctionNumberCaseNotNumberMultiple')],
+            ["sum(*)", doc.getElementById('FunctionSumCaseJavarosa')]
+        ].forEach(function(t) {
+            var result = documentEvaluate(t[0], t[1], null, win.XPathResult.NUMBER_TYPE, null);
+            expect(result.numberValue).to.be.a('number');
+            expect(result.numberValue).to.deep.equal(NaN);
+        });
+    });
 
-//              result = documentEvaluate("number(true())", doc, null, win.XPathResult.NUMBER_TYPE, null);
-//              Y.Assert.areSame(1, result.numberValue);//
+    it('sum() fails when too many arguments are provided', function() {
+        var test = function() {
+            documentEvaluate("sum(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
+        };
+        expect(test).to.throw(Error);
+    });
 
-//              result = documentEvaluate("number(false())", doc, null, win.XPathResult.NUMBER_TYPE, null);
-//              Y.Assert.areSame(0, result.numberValue);
-//          },//
+    it('sum() fails when too few arguments are provided', function() {
+        var test = function() {
+            documentEvaluate("sum()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
+        };
+        expect(test).to.throw(Error);
+    });
 
-//          testNumberString: function() {
-//              var result, input, i;//
+    it('floor()', function() {
+        [
+            ["floor(-1.55)", -2],
+            ["floor(2.44)", 2],
+            ["floor(0.001)", 0],
+            ["floor(1.5)", 1],
+            ["floor(5)", 5],
+            ["floor(1.00)", 1],
+            ["floor(-1.05)", -2]
+        ].forEach(function(t) {
+            var result = documentEvaluate(t[0], doc, null, win.XPathResult.NUMBER_TYPE, null);
+            expect(result.numberValue).to.equal(t[1]);
+        });
+    });
 
-//              input = [
-//                  ["number('-1.0')", -1],
-//                  ["number('1')", 1],
-//                  ["number('0.199999')", 0.199999],
-//                  ["number('-0.9991')", -0.9991],
-//                  ["number('0.0')", 0],
-//                  ["number('.0')", 0],
-//                  ["number('.112')", 0.112],
-//                  ["number('0.')", 0],
-//                  ["number('  1.1')", 1.1],
-//                  ["number('1.1   ')", 1.1],
-//                  ["number('1.1   \n ')", 1.1],
-//                  ["number('  1.1 \n\r\n  ')", 1.1]
-//              ];//
+    it('floor() fails when too many arguments are provided', function() {
+        var test = function() {
+            documentEvaluate("floor(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
+        };
+        expect(test).to.throw(Error);
+    });
 
-//              for (i = 0; i < input.length; i++) {
-//                  result = documentEvaluate(input[i][0], doc, null, win.XPathResult.NUMBER_TYPE, null);
-//                  Y.Assert.areSame(input[i][1], result.numberValue);
-//              }//
+    it('floor failes when too few arguments are provided', function() {
+        var test = function() {
+            documentEvaluate("floor()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
+        };
+        expect(test).to.throw(Error);
+    });
 
-//              input = [
-//                  ["number('asdf')", Number.NaN],
-//                  ["number('1asdf')", Number.NaN],
-//                  ["number('1.1sd')", Number.NaN],
-//                  ["number('.1sd')", Number.NaN],
-//                  ["number(' . ')", Number.NaN]
-//              ];//
+    it('ceiling()', function() {
+        [
+            ["ceiling(-1.55)", -1],
+            ["ceiling(2.44)", 3],
+            ["ceiling(0.001)", 1],
+            ["ceiling(1.5)", 2],
+            ["ceiling(5)", 5],
+            ["ceiling(1.00)", 1],
+            ["ceiling(-1.05)", -1]
+        ].forEach(function(t) {
+            var result = documentEvaluate(t[0], doc, null, win.XPathResult.NUMBER_TYPE, null);
+            expect(result.numberValue).to.equal(t[1]);
+        });
+    });
 
-//              for (i = 0; i < input.length; i++) {
-//                  result = documentEvaluate(input[i][0], doc, null, win.XPathResult.NUMBER_TYPE, null);
-//                  Y.Assert.isTypeOf("number", result.numberValue);
-//                  Y.Assert.isNaN(result.numberValue);
-//              }
-//          },//
+    it('ceiling() fails when too many arguments are provided', function() {
+        var test = function() {
+            documentEvaluate("ceiling(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
+        };
+        expect(test).to.throw(Error);
+    });
 
-//          testNumberNodeset: function() {
-//              var result, input, i;//
+    it('ceiling() fails when not enough arguments are provided', function() {
+        var test = function() {
+            documentEvaluate("ceiling()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
+        };
+        expect(test).to.throw(Error);
+    });
 
-//              input = [
-//                  ["number(self::node())", doc.getElementById('FunctionNumberCaseNumber'), 123],
-//                  ["number(*)", doc.getElementById('FunctionNumberCaseNumberMultiple'), -10],
-//                  ["number()", doc.getElementById('FunctionNumberCaseNumber'), 123]
-//              ];//
+    it('round()', function() {
+        [
+            ["round(-1.55)", -2],
+            ["round(2.44)", 2],
+            ["round(0.001)", 0],
+            ["round(1.5)", 2],
+            ["round(5)", 5],
+            ["round(1.00)", 1],
+            ["round(-1.05)", -1]
+        ].forEach(function(t) {
+            var result = documentEvaluate(t[0], doc, null, win.XPathResult.NUMBER_TYPE, null);
+            expect(result.numberValue).to.equal(t[1]);
+        });
+    });
 
-//              for (i = 0; i < input.length; i++) {
-//                  result = documentEvaluate(input[i][0], input[i][1], null, win.XPathResult.NUMBER_TYPE, null);
-//                  Y.Assert.areSame(input[i][2], result.numberValue);
-//              }//
+    // behaviour changed in OpenRosa
+    xit('round() fails when too many arguments are provided', function() {
+        var test = function() {
+            documentEvaluate("round(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
+        };
+        expect(test).to.throw(Error);
+    });
 
-//              input = [
-//                  ["number()", doc.getElementById('FunctionNumberCaseNotNumber')]
-//              ];//
+    it('round() fails when too few arguments are provided', function() {
+        var test = function() {
+            documentEvaluate("round()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
+        };
+        expect(test).to.throw(Error);
+    });
 
-//              for (i = 0; i < input.length; i++) {
-//                  result = documentEvaluate(input[i][0], input[i][1], null, win.XPathResult.NUMBER_TYPE, null);
-//                  Y.Assert.isTypeOf("number", result.numberValue);
-//                  Y.Assert.isNaN(result.numberValue);
-//              }
-//          },//
-
-//          testNumberExceptionTooManyArgs: function() {
-//              documentEvaluate("number(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
-//          },//
-
-//          testSum: function() {
-//              var result, input, i;//
-
-//              input = [
-//                  ["sum(self::*)", doc.getElementById('FunctionNumberCaseNumber'), 123],
-//                  ["sum(*)", doc.getElementById('FunctionNumberCaseNumberMultiple'), 100]
-//              ];//
-
-//              for (i = 0; i < input.length; i++) {
-//                  result = documentEvaluate(input[i][0], input[i][1], null, win.XPathResult.NUMBER_TYPE, null);
-//                  Y.Assert.areSame(input[i][2], result.numberValue);
-//              }//
-
-//              input = [
-//                  ["sum(node())", doc.getElementById('FunctionNumberCaseNotNumberMultiple')],
-//                  ["sum(*)", doc.getElementById('FunctionSumCaseJavarosa')]
-//              ];//
-
-//              for (i = 0; i < input.length; i++) {
-//                  result = documentEvaluate(input[i][0], input[i][1], null, win.XPathResult.NUMBER_TYPE, null);
-//                  Y.Assert.isTypeOf("number", result.numberValue);
-//                  Y.Assert.isNaN(result.numberValue);
-//              }
-//          },//
-
-//          testSumExceptionTooManyArgs: function() {
-//              documentEvaluate("sum(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
-//          },//
-
-//          testSumExceptionNotEnoughArgs: function() {
-//              documentEvaluate("sum()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
-//          },//
-
-//          testFloor: function() {
-//              var result, input, i;//
-
-//              input = [
-//                  ["floor(-1.55)", -2],
-//                  ["floor(2.44)", 2],
-//                  ["floor(0.001)", 0],
-//                  ["floor(1.5)", 1],
-//                  ["floor(5)", 5],
-//                  ["floor(1.00)", 1],
-//                  ["floor(-1.05)", -2]
-//              ];//
-
-//              for (i = 0; i < input.length; i++) {
-//                  result = documentEvaluate(input[i][0], doc, null, win.XPathResult.NUMBER_TYPE, null);
-//                  Y.Assert.areSame(input[i][1], result.numberValue);
-//              }
-//          },//
-
-//          testFloorExceptionTooManyArgs: function() {
-//              documentEvaluate("floor(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
-//          },//
-
-//          testFloorExceptionNotEnoughArgs: function() {
-//              documentEvaluate("floor()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
-//          },//
-
-//          testCeiling: function() {
-//              var result, input, i;//
-
-//              input = [
-//                  ["ceiling(-1.55)", -1],
-//                  ["ceiling(2.44)", 3],
-//                  ["ceiling(0.001)", 1],
-//                  ["ceiling(1.5)", 2],
-//                  ["ceiling(5)", 5],
-//                  ["ceiling(1.00)", 1],
-//                  ["ceiling(-1.05)", -1]
-//              ];//
-
-//              for (i = 0; i < input.length; i++) {
-//                  result = documentEvaluate(input[i][0], doc, null, win.XPathResult.NUMBER_TYPE, null);
-//                  Y.Assert.areSame(input[i][1], result.numberValue);
-//              }
-//          },//
-
-//          testCeilingExceptionTooManyArgs: function() {
-//              documentEvaluate("ceiling(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
-//          },//
-
-//          testCeilingExceptionNotEnoughArgs: function() {
-//              documentEvaluate("ceiling()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
-//          },//
-
-//          testRound: function() {
-//              var result, input, i;//
-
-//              input = [
-//                  ["round(-1.55)", -2],
-//                  ["round(2.44)", 2],
-//                  ["round(0.001)", 0],
-//                  ["round(1.5)", 2],
-//                  ["round(5)", 5],
-//                  ["round(1.00)", 1],
-//                  ["round(-1.05)", -1]
-//              ];//
-
-//              for (i = 0; i < input.length; i++) {
-//                  result = documentEvaluate(input[i][0], doc, null, win.XPathResult.NUMBER_TYPE, null);
-//                  Y.Assert.areSame(input[i][1], result.numberValue);
-//              }
-//          },//
-
-//          //testRoundExceptionTooManyArgs: function() {
-//          //  documentEvaluate("round(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
-//          //},//
-
-//          testRoundExceptionNotEnoughArgs: function() {
-//              documentEvaluate("round()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
-//          }//
-
-//      });//
+});
