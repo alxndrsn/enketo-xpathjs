@@ -1,5 +1,4 @@
 /* global define, describe, xdescribe, require, it, xit, before, after, beforeEach, afterEach, expect, Blob, documentEvaluate, window, loadXMLFile, helpers, XPathJS*/
-
 "use strict";
 
 var doc, win, docEvaluate;
@@ -23,7 +22,6 @@ before(function(done) {
     document.body.appendChild(iframe);
     */
 
-    //if (!doc) {
     loadXMLFile('/base/test/doc.xml', function(xmlStr) {
         var parser = new window.DOMParser();
         win = window;
@@ -32,7 +30,4 @@ before(function(done) {
         docEvaluate = win.document.evaluate;
         done();
     });
-    //} else {
-    //    done();
-    //}
 });
