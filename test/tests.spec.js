@@ -12,63 +12,6 @@
 
 
 
-//      tests.XPathExpressionEvaluateCase = new Y.Test.Case({
-//          name: 'XPathExpression.evaluate Tests',//
-
-//          _should: {
-//              error: {
-//                  testContextNodeParameterExceptionDocumentFragment: true
-//              },
-//              ignore: {}
-//          },//
-
-//          testContextNodeParameter: function() {
-//              var result, input, i;//
-
-//              input = [
-//                  [".", doc, 9], // Document
-//                  [".", doc.documentElement, 1], // Element
-//                  [".", doc.getElementById('testContextNodeParameter'), 1], // Element
-//                  [".", filterAttributes(doc.getElementById('testContextNodeParameter').attributes)[0], 2], // Attribute
-//                  [".", doc.getElementById('testContextNodeParameterText').firstChild, 3], // Text//
-
-//                  // TODO: See for more details http://reference.sitepoint.com/javascript/CDATASection
-//                  // [".", doc.getElementById('testContextNodeParameterCData').firstChild, 4] // CDATASection//
-
-//                  // TODO: See for more details http://reference.sitepoint.com/javascript/ProcessingInstruction
-//                  //[".", doc.getElementById('testContextNodeParameterProcessingInstruction').firstChild, 7], // ProcessingInstruction//
-
-//                  [".", doc.getElementById('testContextNodeParameterComment').firstChild, 8] // Comment
-//              ];//
-
-//              for (i = 0; i < input.length; i++) {
-//                  Y.Assert.areSame(input[i][2], input[i][1].nodeType);
-//                  result = documentEvaluate(input[i][0], input[i][1], null, win.XPathResult.ANY_UNORDERED_NODE_TYPE, null);
-//                  Y.Assert.areSame(input[i][1], result.singleNodeValue);
-//              }
-//          },//
-
-//          testContextNodeParameterNamespace: function() {
-//              var result, i, item;//
-
-//              // get a namespace node
-//              result = documentEvaluate("namespace::node()", doc.getElementById('testContextNodeParameterNamespace'), null, win.XPathResult.ANY_UNORDERED_NODE_TYPE, null);
-//              item = result.singleNodeValue;
-//              Y.Assert.isNotNull(item);
-//              Y.Assert.areSame(item.nodeType, 13);//
-
-//              // use namespacenode as a context node
-//              result = documentEvaluate(".", item, null, win.XPathResult.ANY_UNORDERED_NODE_TYPE, null);
-//              Y.Assert.areSame(item, result.singleNodeValue);
-//          },//
-
-//          testContextNodeParameterExceptionDocumentFragment: function() {
-//              documentEvaluate(".", doc.createDocumentFragment(), null, win.XPathResult.ANY_UNORDERED_NODE_TYPE, null);
-//          }
-//      });//
-
-
-
 //      tests.FunctionNodesetIdCase = new Y.Test.Case({//
 
 //          name: "Nodset Function Id Tests",//
