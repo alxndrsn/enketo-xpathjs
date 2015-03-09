@@ -1,3 +1,4 @@
+/* global doc, win, expect, docEvaluate, XMLHttpRequest */
 "use strict";
 
 var helpers = {
@@ -283,23 +284,23 @@ var helpers = {
     filterAttributes = function(attributes) {
         var specifiedAttributes = [],
             i,
-            name; //
+            name;
 
         for (i = 0; i < attributes.length; i++) {
             if (!attributes[i].specified) {
                 // ignore non-specified attributes
                 continue;
-            } //
+            }
 
             name = attributes[i].nodeName.split(':'); //
 
             if (name[0] === 'xmlns') {
                 // ignore namespaces
                 continue;
-            } //
+            }
 
             specifiedAttributes.push(attributes[i]);
-        } //
+        }
 
         return specifiedAttributes;
     },
@@ -307,58 +308,58 @@ var helpers = {
     filterSpecifiedAttributes = function(attributes) {
         var specifiedAttributes = [],
             i,
-            name; //
+            name;
 
         for (i = 0; i < attributes.length; i++) {
             if (!attributes[i].specified) {
                 // ignore non-specified attributes
                 continue;
-            } //
+            }
 
             specifiedAttributes.push(attributes[i]);
-        } //
+        }
 
         return specifiedAttributes;
     },
 
     checkNodeResultNamespace = function(expression, contextNode, expectedResult, resolver) {
-        var j, result, item, res; //
+        var j, result, item, res;
 
-        res = (!resolver) ? null : resolver; //
+        res = (!resolver) ? null : resolver;
 
-        result = documentEvaluate(expression, contextNode, res, win.XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); //
+        result = documentEvaluate(expression, contextNode, res, win.XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
 
-        Y.Assert.areSame(expectedResult.length, result.snapshotLength); //
+        expect(result.snapshotLength).to.equal(expectedResult.length)
 
         for (j = 0; j < result.snapshotLength; j++) {
             item = result.snapshotItem(j);
-            Y.Assert.areSame('#namespace', item.nodeName);
-            Y.Assert.areSame(expectedResult[j][0], item.localName);
-            Y.Assert.areSame(expectedResult[j][1], item.namespaceURI);
+            expect(item.nodeName).to.equal('#namespace');
+            expect(item.localName).to.equal(expectedResult[j][0]);
+            expect(item.namespaceURI).to.equal(expectedResult[j][1]);
         }
     },
 
     checkNodeResult = function(expression, contextNode, expectedResult, resolver) {
-        var result, j, item, res; //
+        var result, j, item, res;
 
-        res = (!resolver) ? null : resolver; //
+        res = (!resolver) ? null : resolver;
 
-        result = documentEvaluate(expression, contextNode, res, win.XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); //
+        result = documentEvaluate(expression, contextNode, res, win.XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
 
-        Y.Assert.areSame(expectedResult.length, result.snapshotLength); //
+        expect(result.snapshotLength).to.equal(expectedResult.length);
 
         for (j = 0; j < result.snapshotLength; j++) {
             item = result.snapshotItem(j);
-            Y.Assert.areSame(expectedResult[j], item);
+            expect(item).to.deep.equal(expectedResult[j]);
         }
     },
 
     parseNamespacesFromAttributes = function(attributes, namespaces) {
         var i,
-            name; //
+            name;
 
         for (i = attributes.length - 1; i >= 0; i--) {
-            name = attributes.item(i).nodeName.split(':'); //
+            name = attributes.item(i).nodeName.split(':');
 
             if (name[0] === 'xmlns') {
                 if (name.length == 1) {
