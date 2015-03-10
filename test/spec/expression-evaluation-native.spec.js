@@ -46,7 +46,7 @@ describe('XPath expression evaluation', function() {
 		var test = function() {
 			documentEvaluate(".", doc.createDocumentFragment(), null, win.XPathResult.ANY_UNORDERED_NODE_TYPE, null);
 		};
-		expect(test).to.throw(Error);
+		expect(test).to.throw(win.Error);
 	});
 
 });

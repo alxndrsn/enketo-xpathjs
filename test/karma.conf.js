@@ -16,9 +16,10 @@ module.exports = function(config) {
 
 
         // list of files / patterns to load in the browser
-        files: [
-            'src/engine.js',
-            'build/parser.js', {
+        files: [{
+                pattern: 'build/**/*.js',
+                included: false
+            }, {
                 pattern: 'test/**/*.xml',
                 watched: true,
                 served: true,

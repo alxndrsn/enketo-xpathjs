@@ -43,20 +43,20 @@ var helpers = {
                     // TODO: IE support
                     //return node.ownerElement;
                     throw new Error('Internal Error: getComparableNode - Node type not implemented: ' + node.nodeType);
-                    break; //
+                    break;
 
                 case 3: // text
                 case 4: // CDATASection
                 case 7: // processing instruction
                 case 8: // comment
                     return node.parentNode;
-                    break; //
+                    break;
 
                 case 1: // element
                 case 9: // document
                     // leave as is
                     return node;
-                    break; //
+                    break;
 
                 default:
                     throw new Error('Internal Error: getComparableNode - Node type not supported: ' + node.nodeType);
@@ -73,19 +73,19 @@ var helpers = {
                 result,
                 ancestor,
                 i,
-                item; //
+                item;
 
             // check for native implementation
             if (a.compareDocumentPosition) {
                 return a.compareDocumentPosition(b);
-            } //
+            }
 
             if (a === b) {
                 return 0;
-            } //
+            }
 
             a2 = helpers.getComparableNode(a);
-            b2 = helpers.getComparableNode(b); //
+            b2 = helpers.getComparableNode(b);
 
             // handle document case
             if (a2.nodeType === 9) {
@@ -125,7 +125,7 @@ var helpers = {
                         }
                     }
                 }
-            } //
+            }
 
             if (a === a2) {
                 if (b === b2) {
@@ -142,7 +142,7 @@ var helpers = {
                         ancestor = a;
                         while (ancestor.parentNode !== b2) {
                             ancestor = ancestor.parentNode;
-                        } //
+                        }
 
                         // return "a pre b" or "b pre a" depending on which is occurs first in b2.childNodes
                         for (i = 0; i < b2.childNodes.length; i++) {
@@ -152,7 +152,7 @@ var helpers = {
                             } else if (item === b) {
                                 return 2;
                             }
-                        } //
+                        }
 
                         throw new Error('Internal Error: should not get to here. 1');
                     } else {
@@ -173,7 +173,7 @@ var helpers = {
                         ancestor = b;
                         while (ancestor.parentNode !== a2) {
                             ancestor = ancestor.parentNode;
-                        } //
+                        }
 
                         // return "a pre b" or "b pre a" depending on which is occurs first in a2.childNodes
                         for (i = 0; i < a2.childNodes.length; i++) {
@@ -183,7 +183,7 @@ var helpers = {
                             } else if (item === a) {
                                 return 4;
                             }
-                        } //
+                        }
 
                         throw new Error('Internal Error: should not get to here. 2');
                     } else {
@@ -197,7 +197,7 @@ var helpers = {
                         ancestor = b2;
                         while (ancestor.parentNode !== a2) {
                             ancestor = ancestor.parentNode;
-                        } //
+                        }
 
                         for (i = 0; i < a2.childNodes.length; i++) {
                             item = a2.childNodes.item(i);
@@ -206,7 +206,7 @@ var helpers = {
                             } else if (item === a) {
                                 return 4;
                             }
-                        } //
+                        }
 
                         throw new Error('Internal Error: should not get to here. 3');
                     }
@@ -216,7 +216,7 @@ var helpers = {
                         ancestor = a2;
                         while (ancestor.parentNode !== b2) {
                             ancestor = ancestor.parentNode;
-                        } //
+                        }
 
                         for (i = 0; i < b2.childNodes.length; i++) {
                             item = b2.childNodes.item(i);
@@ -225,7 +225,7 @@ var helpers = {
                             } else if (item === b) {
                                 return 2;
                             }
-                        } //
+                        }
 
                         throw new Error('Internal Error: should not get to here. 3');
                     }
@@ -249,22 +249,22 @@ var helpers = {
                         return result;
                     }
                 }
-            } //
+            }
 
             throw new Error('Internal Error: should not get to here. 5');
         },
 
         getAllNodes: function(node) {
             var nodes = [],
-                i; //
+                i;
 
-            node = (node || doc); //
+            node = (node || doc);
 
-            nodes.push(node); //
+            nodes.push(node);
 
             for (i = 0; i < node.childNodes.length; i++) {
                 nodes.push.apply(nodes, helpers.getAllNodes(node.childNodes.item(i)));
-            } //
+            }
 
             return nodes;
         }
@@ -282,9 +282,8 @@ var helpers = {
     },
 
     filterAttributes = function(attributes) {
-        var specifiedAttributes = [],
-            i,
-            name;
+        var i, name,
+            specifiedAttributes = [];
 
         for (i = 0; i < attributes.length; i++) {
             if (!attributes[i].specified) {
@@ -292,7 +291,7 @@ var helpers = {
                 continue;
             }
 
-            name = attributes[i].nodeName.split(':'); //
+            name = attributes[i].nodeName.split(':');
 
             if (name[0] === 'xmlns') {
                 // ignore namespaces
@@ -329,7 +328,7 @@ var helpers = {
 
         result = documentEvaluate(expression, contextNode, res, win.XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
 
-        expect(result.snapshotLength).to.equal(expectedResult.length)
+        expect(result.snapshotLength).to.equal(expectedResult.length);
 
         for (j = 0; j < result.snapshotLength; j++) {
             item = result.snapshotItem(j);
@@ -380,18 +379,19 @@ var helpers = {
         }
 
         return nodes;
-    },
-
-    loadXMLFile = function(url, callback) {
-        var xhr = new XMLHttpRequest();
-
-        xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                callback(this.response);
-            }
-        };
-
-        xhr.open('GET', url);
-        xhr.responseType = 'text';
-        xhr.send();
     };
+/*
+loadXMLFile = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            callback(this.response);
+        }
+    };
+
+    xhr.open('GET', url);
+    xhr.responseType = 'text';
+    xhr.send();
+};
+*/

@@ -158,7 +158,7 @@ describe('axes', function() {
             var test = function() {
                 checkNodeResult("self::node()", fragment, [fragment]);
             };
-            expect(test).to.throw(Error);
+            expect(test).to.throw(win.Error);
         });
 
     });

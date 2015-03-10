@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 			},
 			browsers: {
 				configFile: 'test/karma.conf.js',
-				browsers: ['Chrome' /*, 'Firefox', 'Safari', 'Opera'*/ ]
+				browsers: ['Chrome', /*'Firefox', */ 'Safari', 'Opera']
 			}
 		}
 	});

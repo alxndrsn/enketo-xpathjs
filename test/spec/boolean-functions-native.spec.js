@@ -12,7 +12,7 @@ describe('native boolean functions', function() {
         var test = function() {
             documentEvaluate("true(1)", doc, helpers.xhtmlResolver, win.XPathResult.BOOLEAN_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('false()', function() {
@@ -24,7 +24,7 @@ describe('native boolean functions', function() {
         var test = function() {
             documentEvaluate("false('a')", doc, helpers.xhtmlResolver, win.XPathResult.BOOLEAN_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('boolean()', function() {
@@ -95,14 +95,14 @@ describe('native boolean functions', function() {
         var test = function() {
             documentEvaluate("boolean()", doc, helpers.xhtmlResolver, win.XPathResult.BOOLEAN_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('boolean() fails when too many arguments are provided', function() {
         var test = function() {
             documentEvaluate("boolean(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.BOOLEAN_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('not()', function() {
@@ -122,14 +122,14 @@ describe('native boolean functions', function() {
         var test = function() {
             documentEvaluate("not()", doc, helpers.xhtmlResolver, win.XPathResult.BOOLEAN_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('not() fails when too many arguments are provided', function() {
         var test = function() {
             documentEvaluate("not(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.BOOLEAN_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('lang()', function() {
@@ -157,13 +157,13 @@ describe('native boolean functions', function() {
         var test = function() {
             documentEvaluate("lang()", doc, helpers.xhtmlResolver, win.XPathResult.BOOLEAN_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('lang() fails when too many arguments are provided', function() {
         var test = function() {
             documentEvaluate("lang(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.BOOLEAN_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 });

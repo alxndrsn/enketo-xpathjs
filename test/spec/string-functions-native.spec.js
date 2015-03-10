@@ -88,7 +88,7 @@ describe('native string functions', function() {
         var test = function() {
             documentEvaluate("string(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.STRING_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('concat()', function() {
@@ -108,12 +108,12 @@ describe('native string functions', function() {
         var test = function() {
             documentEvaluate("concat()", doc, helpers.xhtmlResolver, win.XPathResult.STRING_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
 
         test = function() {
             documentEvaluate("concat(1)", doc, helpers.xhtmlResolver, win.XPathResult.STRING_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('starts-with', function() {
@@ -134,19 +134,19 @@ describe('native string functions', function() {
         var test = function() {
             documentEvaluate("starts-with(1, 2, 3)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('start-with() fails when not enough arguments are provided', function() {
         var test = function() {
             documentEvaluate("starts-with()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
 
         test = function() {
             documentEvaluate("starts-with(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('contains()', function() {
@@ -167,19 +167,19 @@ describe('native string functions', function() {
         var test = function() {
             documentEvaluate("contains(1, 2, 3)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('contains() fails when too few arguments are provided', function() {
         var test = function() {
             documentEvaluate("contains()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
 
         test = function() {
             documentEvaluate("contains(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('substring-before()', function() {
@@ -202,18 +202,18 @@ describe('native string functions', function() {
         var test = function() {
             documentEvaluate("substring-before(1, 2, 3)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('substring-before() with too few arguments', function() {
         var test = function() {
             documentEvaluate("substring-before()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
         test = function() {
             documentEvaluate("substring-before(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('substring-after()', function() {
@@ -236,19 +236,19 @@ describe('native string functions', function() {
         var test = function() {
             documentEvaluate("substring-after(1, 2, 3)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('substring-after() fails when too few arguments are provided', function() {
         var test = function() {
             documentEvaluate("substring-after()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
 
         test = function() {
             documentEvaluate("substring-after(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('substring()', function() {
@@ -277,19 +277,19 @@ describe('native string functions', function() {
         var test = function() {
             documentEvaluate("substring(1, 2, 3, 4)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('substring() fails when too few arguments are provided', function() {
         var test = function() {
             documentEvaluate("substring()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
 
         test = function() {
             documentEvaluate("substring(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('string-length()', function() {
@@ -310,7 +310,7 @@ describe('native string functions', function() {
         var test = function() {
             documentEvaluate("string-length(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('normalize-space', function() {
@@ -338,7 +338,7 @@ describe('native string functions', function() {
         var test = function() {
             documentEvaluate("normalize-space(1,2)", doc, helpers.xhtmlResolver, win.XPathResult.STRING_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('translate()', function() {
@@ -361,23 +361,23 @@ describe('native string functions', function() {
         var test = function() {
             documentEvaluate("translate(1, 2, 3, 4)", doc, helpers.xhtmlResolver, win.XPathResult.STRING_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('translate() fails when too few arguments are provided', function() {
         var test = function() {
             documentEvaluate("translate()", doc, helpers.xhtmlResolver, win.XPathResult.STRING_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
 
         test = function() {
             documentEvaluate("translate(1)", doc, helpers.xhtmlResolver, win.XPathResult.STRING_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
 
         test = function() {
             documentEvaluate("translate(1,2)", doc, helpers.xhtmlResolver, win.XPathResult.STRING_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 });

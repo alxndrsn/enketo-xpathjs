@@ -18,7 +18,7 @@ describe('native nodeset functions', function() {
         var test = function() {
             documentEvaluate("last(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('position()', function() {
@@ -45,7 +45,7 @@ describe('native nodeset functions', function() {
         var test = function() {
             documentEvaluate("position(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('count()', function() {
@@ -71,21 +71,21 @@ describe('native nodeset functions', function() {
         var test = function() {
             documentEvaluate("count(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('count() fails when too few arguments are provided', function() {
         var test = function() {
             documentEvaluate("count()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('count() fails when incorrect argument type is provided', function() {
         var test = function() {
             documentEvaluate("count(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('local-name()', function() {
@@ -150,14 +150,14 @@ describe('native nodeset functions', function() {
         var test = function() {
             documentEvaluate("local-name(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('local-name() fails when the wrong type argument is provided', function() {
         var test = function() {
             documentEvaluate("local-name(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('namespace-uri()', function() {
@@ -212,14 +212,14 @@ describe('native nodeset functions', function() {
         var test = function() {
             documentEvaluate("namespace-uri(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('namespace-uri() fails when wrong type of argument is provided', function() {
         var test = function() {
             documentEvaluate("namespace-uri(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('name()', function() {
@@ -274,13 +274,13 @@ describe('native nodeset functions', function() {
         var test = function() {
             documentEvaluate("name(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('name() fails when the wrong argument type is provided', function() {
         var test = function() {
             documentEvaluate("name(1)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 });

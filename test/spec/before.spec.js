@@ -1,33 +1,38 @@
-/* global define, describe, xdescribe, require, it, xit, before, after, beforeEach, afterEach, expect, Blob, documentEvaluate, window, loadXMLFile, helpers, XPathJS*/
+/* global define, describe, xdescribe, require, it, xit, before, after, beforeEach, afterEach, expect, Blob, documentEvaluate, window, document, loadXMLFile, helpers, XPathJS*/
 "use strict";
 
 var doc, win, docEvaluate;
 
 before(function(done) {
     console.log('running before');
-    /*
+
     var iframe = document.createElement('iframe');
     iframe.setAttribute('src', '/base/test/doc.xml');
 
     iframe.onload = function() {
-        XPathJS.bindDomLevel3XPath(doc);
-        win = window;
-        doc = iframe.contentWindow.document;
-        console.log(typeof win, doc);
-        console.log('el1', doc.getElementById("FunctionSumCaseJavarosa"));
+        var script = document.createElement('script');
+        // TODO: should load parser and engine separately to facilate development
+        script.setAttribute('src', '/base/build/xpathjs_javarosa.js');
 
-        docEvaluate = win.document.evaluate;
-        done();
+        script.onload = function() {
+            win = iframe.contentWindow;
+            doc = win.document;
+            win.XPathJS.bindDomLevel3XPath();
+            docEvaluate = doc.evaluate;
+            done();
+        };
+        iframe.contentWindow.document.body.appendChild(script);
     };
     document.body.appendChild(iframe);
-    */
 
+    /*
     loadXMLFile('/base/test/doc.xml', function(xmlStr) {
         var parser = new window.DOMParser();
         win = window;
-        XPathJS.bindDomLevel3XPath();
+        win.XPathJS.bindDomLevel3XPath();
         doc = parser.parseFromString(xmlStr, "text/xml");
         docEvaluate = win.document.evaluate;
         done();
-    });
+    });*/
+
 });

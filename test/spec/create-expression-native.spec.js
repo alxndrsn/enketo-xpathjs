@@ -10,13 +10,13 @@ describe('creating expressions', function() {
         expect(expression).to.be.an.instanceOf(win.XPathExpression);
     });
 
-    it('deals throws invalid expression exceptions', function() {
+    it('throws invalid expression exceptions', function() {
         var resolver = documentCreateNSResolver(doc.documentElement);
         var test = function() {
             documentCreateExpression('aa&&aa', resolver);
         };
 
-        expect(test).to.throw(XPathException.INVALID_EXPRESSION_ERR, /DOM XPath Exception 51/);
+        expect(test).to.throw(win.XPathException.INVALID_EXPRESSION_ERR); //,/DOM XPath Exception 51/);
     });
 
     it('throws exception when parsing without a resolver', function() {
@@ -24,7 +24,7 @@ describe('creating expressions', function() {
             documentCreateExpression('xml:node');
         };
 
-        expect(test).to.throw(XPathException.NAMESPACE_ERR);
+        expect(test).to.throw(win.XPathException.NAMESPACE_ERR);
     });
 
     it('parses with a namespace', function() {
@@ -42,6 +42,6 @@ describe('creating expressions', function() {
             documentCreateExpression('as:node1 | ev:node2', resolver);
         };
 
-        expect(test).to.throw(DOMException.NAMESPACE_ERR, /DOM Exception 14/);
+        expect(test).to.throw(win.DOMException.NAMESPACE_ERR); //,/DOM Exception 14/);
     });
 });

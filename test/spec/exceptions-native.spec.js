@@ -20,7 +20,7 @@ describe('xpath exceptions', function() {
         expect(ex.message).to.equal(message);
 
         // check toString
-        expect(ex.toString).to.be.an.instanceOf(Function);
+        expect(ex.toString).to.be.an.instanceOf(win.Function);
         expect(ex.toString()).to.equal('XPathException: "' + ex.message + '", code: "' + ex.code + '", name: "INVALID_EXPRESSION_ERR"');
     });
 
@@ -33,7 +33,7 @@ describe('xpath exceptions', function() {
         var test = function() {
             new win.XPathException(99, 'message goes here');
         };
-        expect(test).to.throw(Error, /Unsupported XPathException code: 99/);
+        expect(test).to.throw(win.Error, /Unsupported XPathException code: 99/);
     });
 
 });

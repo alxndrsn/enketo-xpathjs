@@ -84,7 +84,7 @@ describe('native number functions', function() {
         var test = function() {
             documentEvaluate("number(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('sum()', function() {
@@ -110,14 +110,14 @@ describe('native number functions', function() {
         var test = function() {
             documentEvaluate("sum(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('sum() fails when too few arguments are provided', function() {
         var test = function() {
             documentEvaluate("sum()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('floor()', function() {
@@ -139,14 +139,14 @@ describe('native number functions', function() {
         var test = function() {
             documentEvaluate("floor(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('floor failes when too few arguments are provided', function() {
         var test = function() {
             documentEvaluate("floor()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('ceiling()', function() {
@@ -168,14 +168,14 @@ describe('native number functions', function() {
         var test = function() {
             documentEvaluate("ceiling(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('ceiling() fails when not enough arguments are provided', function() {
         var test = function() {
             documentEvaluate("ceiling()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('round()', function() {
@@ -198,14 +198,14 @@ describe('native number functions', function() {
         var test = function() {
             documentEvaluate("round(1, 2)", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
     it('round() fails when too few arguments are provided', function() {
         var test = function() {
             documentEvaluate("round()", doc, helpers.xhtmlResolver, win.XPathResult.NUMBER_TYPE, null);
         };
-        expect(test).to.throw(Error);
+        expect(test).to.throw(win.Error);
     });
 
 });
