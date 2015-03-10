@@ -372,12 +372,12 @@ var helpers = {
     },
 
     snapshotToArray = function(result) {
-        var nodes = [],
-            i; //
+        var i,
+            nodes = [];
 
         for (i = 0; i < result.snapshotLength; i++) {
             nodes.push(result.snapshotItem(i));
-        } //
+        }
 
         return nodes;
     },
