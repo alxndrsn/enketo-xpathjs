@@ -5,33 +5,34 @@ describe('creating expressions', function() {
 
     it('parses', function() {
         var resolver = documentCreateNSResolver(doc.documentElement);
-    var expression = documentCreateExpression('1', resolver);
+        var expression = documentCreateExpression('1', resolver);
 
-    expect(expression).to.be.an.instanceOf(win.XPathExpression);
-    //Y.Assert.isInstanceOf(win.XPathExpression, expression);
-});
+        expect(expression).to.be.an.instanceOf(win.XPathExpression);
+    });
 
-it('deals throws invalid expression exceptions', function() {
-    var resolver = documentCreateNSResolver(doc.documentElement);
-    var test = function() {
-        documentCreateExpression('aa&&aa', resolver);
-    };
+    it('deals throws invalid expression exceptions', function() {
+        var resolver = documentCreateNSResolver(doc.documentElement);
+        var test = function() {
+            documentCreateExpression('aa&&aa', resolver);
+        };
 
-    expect(test).to.throw(XPathException.INVALID_EXPRESSION_ERR, /DOM XPath Exception 51/);
-});
+        expect(test).to.throw(XPathException.INVALID_EXPRESSION_ERR, /DOM XPath Exception 51/);
+    });
 
-it('throws exception when parsing without a resolver', function() {
-    var test = function() {
-        documentCreateExpression('xml:node');
-    };
-    expect(test).to.throw(XPathException.NAMESPACE_ERR);
-});
+    it('throws exception when parsing without a resolver', function() {
+        var test = function() {
+            documentCreateExpression('xml:node');
+        };
 
-it('parses with a namespace', function() {
-            var test = function() {
+        expect(test).to.throw(XPathException.NAMESPACE_ERR);
+    });
+
+    it('parses with a namespace', function() {
+        var test = function() {
             var resolver = documentCreateNSResolver(doc.documentElement);
             var expression = documentCreateExpression('node1 | xml:node2 | ev:node2', resolver);
         };
+
         expect(test).not.to.throw();
     });
 

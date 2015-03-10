@@ -43,7 +43,7 @@ describe('nodeset id() function', function() {
         ]);
     });
 
-    it('works if the namespace of the id attribute is the xhtml namespace', function() {
+    it('works if the namespace of the id attribute is the XHTML namespace', function() {
         var node = doc.getElementById('FunctionNodesetIdCaseXhtmlNamespaceContainer').firstChild;
         expect(node).to.be.an('object');
 

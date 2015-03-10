@@ -1,7 +1,7 @@
 /* global define, describe, xdescribe, require, it, xit, before, after, beforeEach, afterEach, expect, Blob, doc, win, docEvaluate, DOMException, XPathException, documentEvaluate, documentCreateExpression, documentCreateNSResolver, checkNodeResult, checkNodeResultNamespace, parseNamespacesFromAttributes, window, filterAttributes, loadXMLFile, helpers, XPathJS*/
 "use strict";
 
-describe('node-name', function() {
+describe('node name for', function() {
     var h;
 
     before(function() {
@@ -34,7 +34,7 @@ describe('node-name', function() {
         namespaces.push(['', 'http://www.w3.org/1999/xhtml']);
         parseNamespacesFromAttributes(node.attributes, namespaces);
         namespaces.push(['ev', 'http://some-namespace.com/nss']);
-        namespaces.push(['xml', 'http://www.w3.org/XML/1998/namespace']); //
+        namespaces.push(['xml', 'http://www.w3.org/XML/1998/namespace']);
 
         checkNodeResultNamespace("namespace::*", node, namespaces);
     });

@@ -264,7 +264,7 @@ describe('number operators', function() {
         });
     });
 
-    it('*,+,-,mod,div precendence rules are handled correctly', function() {
+    it('*,+,-,mod,div precendence rules are applied correctly', function() {
         [
             ["1+2*3", 7],
             ["2*3+1", 7],

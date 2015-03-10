@@ -142,7 +142,7 @@ describe('and/or operators', function() {
         });
     });
 
-    it('or/and precendence is handled correctly', function() {
+    it('or/and precendence rules are applied correctly', function() {
         [
             ["true() or true() and false()", true],
             ["true() and false() or true()", true],

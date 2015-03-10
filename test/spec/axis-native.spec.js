@@ -3,116 +3,121 @@
 
 describe('axes', function() {
 
-    var h = {
-        getNodeAttribute: function() {
-            var attribute,
-                node = doc.getElementById('testStepAxisNodeAttribute'),
-                i;
+    var h;
 
-            for (i = 0; i < node.attributes.length; i++) {
-                if (node.attributes[i].specified) {
-                    attribute = node.attributes[i];
-                    break;
+    before(function() {
+
+        h = {
+            getNodeAttribute: function() {
+                var attribute,
+                    node = doc.getElementById('testStepAxisNodeAttribute'),
+                    i;
+
+                for (i = 0; i < node.attributes.length; i++) {
+                    if (node.attributes[i].specified) {
+                        attribute = node.attributes[i];
+                        break;
+                    }
                 }
-            }
 
-            expect(attribute).is.an('object');
+                expect(attribute).is.an('object');
 
-            return attribute;
-        },
+                return attribute;
+            },
 
-        getNodeComment: function() {
-            return doc.getElementById('testStepAxisNodeComment').firstChild;
-        },
+            getNodeComment: function() {
+                return doc.getElementById('testStepAxisNodeComment').firstChild;
+            },
 
-        getNodeCData: function() {
-            return doc.getElementById('testStepAxisNodeCData').firstChild;
-        },
+            getNodeCData: function() {
+                return doc.getElementById('testStepAxisNodeCData').firstChild;
+            },
 
-        getNodeProcessingInstruction: function() {
-            return doc.getElementById('testStepAxisNodeProcessingInstruction').firstChild;
-        },
+            getNodeProcessingInstruction: function() {
+                return doc.getElementById('testStepAxisNodeProcessingInstruction').firstChild;
+            },
 
-        getNodeNamespace: function() {
-            var result;
+            getNodeNamespace: function() {
+                var result;
 
-            result = documentEvaluate("namespace::node()", doc.getElementById('testStepAxisNodeNamespace'), null, win.XPathResult.ANY_UNORDERED_NODE_TYPE, null);
-            return result.singleNodeValue;
-        },
+                result = documentEvaluate("namespace::node()", doc.getElementById('testStepAxisNodeNamespace'), null, win.XPathResult.ANY_UNORDERED_NODE_TYPE, null);
+                return result.singleNodeValue;
+            },
 
-        followingSiblingNodes: function(node) {
-            var nodes = [],
-                i;
+            followingSiblingNodes: function(node) {
+                var nodes = [],
+                    i;
 
-            while (node = node.nextSibling) {
-                nodes.push(node);
-            }
-
-            return nodes;
-        },
-
-        precedingSiblingNodes: function(node) {
-            var nodes = [],
-                i;
-
-            while (node = node.previousSibling) {
-                if (node.nodeType == 10)
-                    continue;
-                nodes.push(node);
-            }
-
-            nodes.reverse();
-
-            return nodes;
-        },
-
-        followingNodes: function(node) {
-            var nodes = [],
-                i,
-                nodesAll,
-                result,
-                node2;
-
-            nodesAll = helpers.getAllNodes();
-
-            for (i = 0; i < nodesAll.length; i++) {
-                node2 = nodesAll[i]; //
-                if (node2.nodeType == 10) // document type node
-                    continue; //
-                result = helpers.comparePosition(node, node2);
-                if (4 === result) {
-                    nodes.push(node2);
+                while (node = node.nextSibling) {
+                    nodes.push(node);
                 }
-            }
 
-            return nodes;
-        },
+                return nodes;
+            },
 
-        precedingNodes: function(node) {
-            var nodes = [],
-                i,
-                nodesAll,
-                result,
-                node2;
+            precedingSiblingNodes: function(node) {
+                var nodes = [],
+                    i;
 
-            nodesAll = helpers.getAllNodes();
-
-            for (i = 0; i < nodesAll.length; i++) {
-                node2 = nodesAll[i];
-
-                if (node2.nodeType == 10) // document type node
-                    continue;
-
-                result = helpers.comparePosition(node, node2);
-                if (2 == result) {
-                    nodes.push(node2);
+                while (node = node.previousSibling) {
+                    if (node.nodeType == 10)
+                        continue;
+                    nodes.push(node);
                 }
+
+                nodes.reverse();
+
+                return nodes;
+            },
+
+            followingNodes: function(node) {
+                var nodes = [],
+                    i,
+                    nodesAll,
+                    result,
+                    node2;
+
+                nodesAll = helpers.getAllNodes();
+
+                for (i = 0; i < nodesAll.length; i++) {
+                    node2 = nodesAll[i]; //
+                    if (node2.nodeType == 10) // document type node
+                        continue; //
+                    result = helpers.comparePosition(node, node2);
+                    if (4 === result) {
+                        nodes.push(node2);
+                    }
+                }
+
+                return nodes;
+            },
+
+            precedingNodes: function(node) {
+                var nodes = [],
+                    i,
+                    nodesAll,
+                    result,
+                    node2;
+
+                nodesAll = helpers.getAllNodes();
+
+                for (i = 0; i < nodesAll.length; i++) {
+                    node2 = nodesAll[i];
+
+                    if (node2.nodeType == 10) // document type node
+                        continue;
+
+                    result = helpers.comparePosition(node, node2);
+                    if (2 == result) {
+                        nodes.push(node2);
+                    }
+                }
+
+                return nodes;
             }
 
-            return nodes;
-        }
-
-    };
+        };
+    });
 
     describe('self axis', function() {
 
@@ -508,7 +513,7 @@ describe('axes', function() {
             checkNodeResult("following-sibling::node()", h.getNodeCData(), h.followingSiblingNodes(h.getNodeCData()));
         });
 
-        it('works for a Comment context', function() {
+        it('works for a comment context', function() {
             checkNodeResult("following-sibling::node()", h.getNodeComment(), h.followingSiblingNodes(h.getNodeComment()));
         });
 
@@ -516,7 +521,7 @@ describe('axes', function() {
             checkNodeResult("following-sibling::node()", h.getNodeProcessingInstruction(), h.followingSiblingNodes(h.getNodeProcessingInstruction()));
         });
 
-        xit('works for a Namespace context', function() {
+        xit('works for a namespace context', function() {
             checkNodeResult("following-sibling::node()", h.getNodeNamespace(), []);
         });
 
@@ -633,7 +638,7 @@ describe('axes', function() {
 
     describe('attribute axis', function() {
 
-        it('works for a cocument context', function() {
+        it('works for a document context', function() {
             checkNodeResult("attribute::node()", doc, []);
         });
 
