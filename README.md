@@ -5,6 +5,8 @@ Enketo-XPathJS is a fork of XPathJS, a pure JavaScript implementation of [XPath 
 
 This fork extends XPathJS with custom ODK/OpenRosa functions and the 'date' datatype. 
 
+###This library is no longer being actively developed. It will soon be replaced by [Enketo Wicked Good XPath](https://github.com/enketo/enketo-wicked-good-xpath).
+
 
 Features
 --------
