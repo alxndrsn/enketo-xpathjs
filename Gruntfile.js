@@ -2,6 +2,9 @@
 "use strict";
 
 module.exports = function(grunt) {
+
+	require( 'time-grunt' )( grunt );
+
 	grunt.initConfig({
 		php: {
 			server: {
@@ -28,6 +31,7 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-php');
 	grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('time-grunt');
 
 	grunt.registerTask('server', ['php:server:keepalive']);
 	grunt.registerTask('default', ['php:server:keepalive']);
