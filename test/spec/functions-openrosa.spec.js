@@ -480,8 +480,8 @@ describe('Custom "OpenRosa" functions', function() {
         expect(result.stringValue).to.equal("");
 
         //change the context
-        // result = documentEvaluate("version()", doc.getElementById('FunctionSelectedCaseEmpty'), null, win.XPathResult.STRING_TYPE, null);
-        // expect(result.stringValue).to.equal("");
+        result = documentEvaluate("version()", doc.getElementById('FunctionSelectedCaseEmpty'), null, win.XPathResult.STRING_TYPE, null);
+        expect(result.stringValue).to.equal("");
     });
 
     it('once()', function() {
