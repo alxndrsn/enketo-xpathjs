@@ -139,7 +139,7 @@ describe('native boolean functions', function() {
             ["lang('EN-us')", doc.documentElement, true],
             ["lang('EN-us-boont')", doc.documentElement, false], //
             // hierarchy check
-            ["lang('EN')", doc.body, true],
+            ["lang('EN')", doc.querySelector('body'), true],
             ["lang('sr')", doc.getElementById('testLang2'), true],
             ["lang('sr-Cyrl-bg')", doc.getElementById('testLang2'), true],
             ["lang('fr')", doc.getElementById('testLang2'), false], //

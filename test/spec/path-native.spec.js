@@ -63,13 +63,13 @@ describe('location path', function() {
     });
 
     it('root node node', function() {
-        checkNodeResult("/xhtml:html/xhtml:body", doc.getElementById('LocationPathCase'), [doc.body], helpers.xhtmlResolver);
+        checkNodeResult("/xhtml:html/xhtml:body", doc.getElementById('LocationPathCase'), [doc.querySelector('body')], helpers.xhtmlResolver);
     });
 
     it('node (node)', function() {
         checkNodeResult("html", doc, [], helpers.xhtmlResolver);
         checkNodeResult("xhtml:html", doc, [doc.documentElement], helpers.xhtmlResolver);
-        checkNodeResult("xhtml:html/xhtml:body", doc, [doc.body], helpers.xhtmlResolver);
+        checkNodeResult("xhtml:html/xhtml:body", doc, [doc.querySelector('body')], helpers.xhtmlResolver);
     });
 
     xit('node attribute', function() {
@@ -110,7 +110,7 @@ describe('location path', function() {
     it('duplicates handled correctly', function() {
         checkNodeResult("ancestor-or-self::* /ancestor-or-self::*", doc.getElementById('LocationPathCaseDuplicates'), [
             doc.documentElement,
-            doc.body,
+            doc.querySelector('body'),
             doc.getElementById('LocationPathCase'),
             doc.getElementById('LocationPathCaseDuplicates')
         ], helpers.xhtmlResolver);

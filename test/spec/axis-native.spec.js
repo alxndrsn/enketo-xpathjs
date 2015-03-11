@@ -352,7 +352,7 @@ describe('axes', function() {
             checkNodeResult("ancestor::node()", doc.getElementById('testStepAxisNodeElement'), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase')
             ]);
         });
@@ -361,7 +361,7 @@ describe('axes', function() {
             checkNodeResult("ancestor::node()", h.getNodeAttribute(), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeAttribute')
             ]);
@@ -371,7 +371,7 @@ describe('axes', function() {
             checkNodeResult("ancestor::node()", h.getNodeCData(), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeCData')
             ]);
@@ -381,7 +381,7 @@ describe('axes', function() {
             checkNodeResult("ancestor::node()", h.getNodeComment(), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeComment')
             ]);
@@ -391,7 +391,7 @@ describe('axes', function() {
             checkNodeResult("ancestor::node()", h.getNodeProcessingInstruction(), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeProcessingInstruction')
             ]);
@@ -401,7 +401,7 @@ describe('axes', function() {
             checkNodeResult("ancestor::node()", h.getNodeNamespace(), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeNamespace')
             ]);
@@ -428,7 +428,7 @@ describe('axes', function() {
             checkNodeResult("ancestor-or-self::node()", doc.getElementById('testStepAxisNodeElement'), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeElement')
             ]);
@@ -438,7 +438,7 @@ describe('axes', function() {
             checkNodeResult("ancestor-or-self::node()", h.getNodeAttribute(), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeAttribute'),
                 h.getNodeAttribute()
@@ -449,7 +449,7 @@ describe('axes', function() {
             checkNodeResult("ancestor-or-self::node()", h.getNodeCData(), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeCData'),
                 h.getNodeCData()
@@ -460,7 +460,7 @@ describe('axes', function() {
             checkNodeResult("ancestor-or-self::node()", h.getNodeComment(), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeComment'),
                 h.getNodeComment()
@@ -471,7 +471,7 @@ describe('axes', function() {
             checkNodeResult("ancestor-or-self::node()", h.getNodeProcessingInstruction(), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeProcessingInstruction'),
                 h.getNodeProcessingInstruction()
@@ -482,7 +482,7 @@ describe('axes', function() {
             checkNodeResult("ancestor-or-self::node()", h.getNodeNamespace(), [
                 doc,
                 doc.documentElement,
-                doc.body,
+                doc.querySelector('body'),
                 doc.getElementById('StepAxisCase'),
                 doc.getElementById('testStepAxisNodeNamespace'),
                 h.getNodeNamespace()

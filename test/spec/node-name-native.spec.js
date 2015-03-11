@@ -50,7 +50,7 @@ describe('node name for', function() {
 
         checkNodeResult("ancestor-or-self::*", attributes[0], [
             doc.documentElement,
-            doc.body,
+            doc.querySelector('body'),
             doc.getElementById('StepNodeTestCaseNameTest'),
             doc.getElementById('StepNodeTestCaseNameTestAttribute')
         ]);

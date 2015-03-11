@@ -7,6 +7,7 @@ before(function(done) {
     console.log('running before');
 
     var iframe = document.createElement('iframe');
+    iframe.setAttribute('id', 'testdoc');
     iframe.setAttribute('src', '/base/test/doc.xml');
 
     iframe.onload = function() {
@@ -21,7 +22,8 @@ before(function(done) {
             docEvaluate = doc.evaluate;
             done();
         };
-        iframe.contentWindow.document.body.appendChild(script);
+
+        iframe.contentWindow.document.querySelector('body').appendChild(script);
     };
     document.body.appendChild(iframe);
 
